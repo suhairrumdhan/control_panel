@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(143, 216, 244, .35), transparent 35%),
+    linear-gradient(135deg, #F7FCFF, #EAF7FC);
+  color: var(--text);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  direction: ltr;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  direction: rtl;
+  overflow-y: auto;
+}
+
+.topbar {
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.topbar h1 {
+  color: var(--primary-dark);
+  font-size: 28px;
+}
+
+.topbar p {
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.admin-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #F3FAFE;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 18px;
+}
+
+.admin-chip div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  direction: ltr;
+}
+
+.admin-chip span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.admin-chip img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
