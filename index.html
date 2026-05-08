@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة تحكم النظام</title>
+  <title>Roshita Admin Control</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/sidebar.css">
@@ -17,25 +16,21 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 </head>
-
 <body>
   <section id="loginPage" class="login-page">
     <div class="login-card">
-      <div class="login-logo">
-        <i class="fa-solid fa-shield-heart"></i>
-      </div>
-
-      <h1>لوحة إدارة النظام</h1>
-      <p>تسجيل دخول المسؤولين فقط</p>
+      <div class="login-logo"><i class="fa-solid fa-shield-heart"></i></div>
+      <h1>لوحة إدارة Roshita</h1>
+      <p>دخول مسؤولي النظام فقط</p>
 
       <div class="form-group">
         <label>البريد الإلكتروني</label>
-        <input id="email" type="email" value="admin@pharmacy-system.com">
+        <input id="email" type="email" autocomplete="email" value="admin@pharmacy-system.com">
       </div>
 
       <div class="form-group">
         <label>كلمة المرور</label>
-        <input id="password" type="password" value="admin2025">
+        <input id="password" type="password" autocomplete="current-password" value="admin2025">
       </div>
 
       <button id="loginBtn" class="primary-btn">تسجيل الدخول</button>
@@ -44,7 +39,7 @@
   </section>
 
   <section id="appShell" class="app-shell hidden">
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="brand">
         <div class="brand-icon"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
         <div>
@@ -54,31 +49,14 @@
       </div>
 
       <nav class="sidebar-menu">
-        <button class="menu-item active" data-page="dashboard">
-          <i class="fa-solid fa-chart-pie"></i>
-          <span>الرئيسية</span>
-        </button>
-
-        <button class="menu-item" data-page="requests">
-          <i class="fa-solid fa-clipboard-check"></i>
-          <span>طلبات التسجيل</span>
-          <b id="pendingBadge">0</b>
-        </button>
-
-        <button class="menu-item" data-page="pharmacies">
-          <i class="fa-solid fa-house-medical"></i>
-          <span>الصيدليات</span>
-        </button>
-        <button class="menu-item" data-page="orders">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>الطلبات</span>
-        </button>
-
+        <button class="menu-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>الرئيسية</span></button>
+        <button class="menu-item" data-page="requests"><i class="fa-solid fa-clipboard-check"></i><span>طلبات التسجيل</span><b id="pendingBadge">0</b></button>
+        <button class="menu-item" data-page="pharmacies"><i class="fa-solid fa-house-medical"></i><span>الصيدليات</span></button>
+        <button class="menu-item" data-page="orders"><i class="fa-solid fa-cart-shopping"></i><span>الطلبات</span></button>
         <button class="menu-item" data-page="users">
           <i class="fa-solid fa-users"></i>
           <span>المستخدمون</span>
         </button>
-
         <button class="menu-item" data-page="alerts">
           <i class="fa-solid fa-triangle-exclamation"></i>
           <span>التنبيهات والإنذارات</span>
@@ -89,31 +67,31 @@
           <span>الإشعارات الجماعية</span>
         </button>
 
+
         <button class="menu-item" data-page="reports">
           <i class="fa-solid fa-chart-line"></i>
           <span>التقارير</span>
         </button>
-      </nav>
-
-      <button id="logoutBtn" class="logout-btn">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <span>تسجيل الخروج</span>
+        <button class="menu-item" data-page="audit">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>سجل العمليات</span>
       </button>
+
+</nav>
+
+      <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span>تسجيل الخروج</span></button>
     </aside>
 
     <main class="main-content">
       <header class="topbar">
-        <div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title">
           <h1 id="pageTitle">الرئيسية</h1>
           <p>إدارة ومراقبة النظام من مكان واحد</p>
         </div>
-
         <div class="admin-chip">
-          <div>
-            <strong id="userName">مسؤول النظام</strong>
-            <span id="userEmail">-</span>
-          </div>
-          <img src="https://ui-avatars.com/api/?name=Admin&background=5EABD6&color=fff">
+          <div><strong id="userName">مسؤول النظام</strong><span id="userEmail">-</span></div>
+          <img src="https://ui-avatars.com/api/?name=Admin&background=5EABD6&color=fff" alt="Admin">
         </div>
       </header>
 
@@ -128,5 +106,10 @@
   <script src="js/pharmacy-requests.js"></script>
   <script src="js/pharmacies.js"></script>
   <script src="js/orders.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/alerts.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/audit-logs.js"></script>
 </body>
 </html>
